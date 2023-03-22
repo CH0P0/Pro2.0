@@ -10,10 +10,10 @@ namespace OOP2
     {
         public static List<string> products = new()
         {
-            "Fanta", "Coca", "Agua", "Salmón",
-            "Albahaca", "Anillo de oro", "Tenaza", "Guantes",
+            "Fanta", "Coca-Cola", "Agua", "Salmón",
+            "Albahaca", "Anillo", "Tenaza", "Guantes",
             "Cable VGA", "Limón", "Pomelo", "Piedra",
-            "Sandwicht de atún", "Mortadela", "Coco", "Gafas de sol"
+            "Sandwich", "Mortadela", "Coco", "Gafas de sol"
         };
 
         

@@ -9,8 +9,11 @@ namespace OOP2
 {
     internal class Product
     {
-        int stock = 10;
+        int stock = 2;
         string product;
+
+        public string GetProduct { get => product; }
+        public int GetStock { get => stock; }
 
         public Product(string product)
         {
@@ -19,7 +22,7 @@ namespace OOP2
 
         public override string ToString() => $"producto: {product}, stock: {stock}";
 
-        public void Less()
+        public void SubsStock()
         {
             if (stock != 0)
                 stock--;
