@@ -16,17 +16,6 @@ namespace OOP2
             "Sandwich", "Mortadela", "Coco", "Gafas de sol"
         };
 
-        
-        public string GetProduct(int j) => products[j];
-
-        public static void GetProducts()
-        {
-            Console.WriteLine("\n\tLista de clientes: ");
-            var query = products.Select((c, indice) => new { indice, producto = c });
-            foreach (var elem in query)
-                Console.WriteLine("\n\t" + elem);
-        }
-
         public static void FillUp(Stock<Product> stock)
         {
             foreach (Product p in stock)
