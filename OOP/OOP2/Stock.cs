@@ -6,16 +6,31 @@ using System.Threading.Tasks;
 
 namespace OOP2
 {
-    internal class Stock
+    internal class Stock<T> : List<T>
     {
-        static int[] stock = new int[] { 10, 10, 10, 10, 10 };
-
-        public static void ReduceStock(int line)
+        public static List<string> products = new()
         {
-            if (stock[line] == 0)
-            {
-                Console.WriteLine("No queda más producto en esta linea");
-            }
+            "Fanta", "Coca", "Agua", "Salmón",
+            "Albahaca", "Anillo de oro", "Tenaza", "Guantes",
+            "Cable VGA", "Limón", "Pomelo", "Piedra",
+            "Sandwicht de atún", "Mortadela", "Coco", "Gafas de sol"
+        };
+
+        
+        public string GetProduct(int j) => products[j];
+
+        public static void GetProducts()
+        {
+            Console.WriteLine("\n\tLista de clientes: ");
+            var query = products.Select((c, indice) => new { indice, producto = c });
+            foreach (var elem in query)
+                Console.WriteLine("\n\t" + elem);
+        }
+
+        public static void FillUp(Stock<Product> stock)
+        {
+            foreach (Product p in stock)
+                p.Fill();
         }
     }
 }

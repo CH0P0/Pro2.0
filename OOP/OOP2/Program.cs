@@ -1,24 +1,33 @@
-﻿/* Tenemos una máquina expendedora de comida, en la que tenemos espacio 
- * para un máximo de 20 productos distintos que se sitúan en cada línea 
- * de distribución. Cada una de las líneas podrá tener un máximo de 10 
- * elementos del mismo producto. Generar las clases relacionadas para 
- * controlar el stock de la máquina y los métodos de extraer 
- * (damos un producto, vemos si está, y si tiene stock, bajamos el stock en uno) 
- * y rellenar la máquina (llenar todas las líneas de productos hasta su máximo). */
-
+﻿
 namespace OOP2
 {
     class Program
     {
-        public static readonly string[] products = new string[] { "Agua", "Cerveza", "Jugo", "Pizza Napolitana", "Caviar" };
-
         static void Main(string[] args)
         {
-            SpendMachine<string, Stock> machine = new();
-            Stock stock = new Stock();
-            for (int i = 0; i < products.Length; i++)
-                machine.Add(products[i], stock);
-            Console.WriteLine(machine.ElementAt(1));
+            Stock<Product> stock = new Stock<Product>();
+            for (int i = 0; i < Stock<string>.products.Count; i++)
+            {
+                stock.Add(new Product(Stock<string>.products[i]));
+            }
+            stock[1].Less();
+            var query = stock.Select(c => c.ToString());
+            foreach (var item in query)
+                Console.WriteLine(" " + item);
+            Stock<Product>.FillUp(stock);
+            foreach (var item in query)
+                Console.WriteLine(" " + item);
+
+        }
+
+        public static int ReadInt(string msg, int? min = null, int? max = null)
+        {
+            int num;
+
+            do
+                Console.WriteLine(msg);
+            while (!Int32.TryParse(Console.ReadLine(), out num) || num < min || num > max);
+            return num;
         }
     }
 }
