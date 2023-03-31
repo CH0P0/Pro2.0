@@ -9,7 +9,7 @@ namespace OOP2
 {
     internal class Product
     {
-        int stock = 2;
+        int stock = 10;
         string product;
 
         public string GetProduct { get => product; }
