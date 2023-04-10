@@ -11,7 +11,9 @@ namespace OOP._5
     {
         static void Main(string[] args)
         {
+            Ficheros.MakeFile();
             Funciones.Menu();
+            Funciones.Save();
         }
     }
 }
