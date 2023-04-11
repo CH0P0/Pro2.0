@@ -14,16 +14,27 @@ namespace OOP._5
         public static void Menu()
         {
             int value;
+            Client client;
             const string MSGNAME = "Introduce nombre cliente", MSGSURNAME = "Introduce apellidos cliente";
-            Client client = new Client(ReadString(MSGNAME, 0),
-                ReadString(MSGSURNAME, 0), codClient++);
-            clientList.Add(client);
+            Console.Write("\n\n\tDesea usar los clientes de la base de datos? S/N");
+            if (Console.ReadKey().Key == ConsoleKey.S)
+            {
+                clientList = Ficheros.TakeData();
+                codClient = clientList[^1].CodClient;
+            }
+            Console.Clear();
+            if (clientList.Count == 0 )
+            {
+                client = new Client(ReadString(MSGNAME, 0),
+                    ReadString(MSGSURNAME, 0), codClient++);
+                clientList.Add(client);
+            }
             do
             {
                 Console.WriteLine("\n\t1: Crear cliente.\n\t" +
                     "2: Buscar si un cliente pertenece a la lista\n\t3: Mostrar la lista\n\t" +
                     "4: Eliminar un cliente de la lista\n\t" +
-                    "0:Eliminar un cliente de la lista");
+                    "0:Cerrar Programa");
                 value = ReadInt("Introduzca una opción", 0, 4);
                 switch (value)
                 {
@@ -37,7 +48,8 @@ namespace OOP._5
                         break;
                     default: break;
                 }
-
+                Console.ReadKey();
+                Console.Clear();
             } while (value != 0);
 
 
@@ -56,6 +68,8 @@ namespace OOP._5
             else
                 Console.WriteLine("El cliente no pertenece a la lista");
         }
+
+        public static void Save() => Ficheros.SaveData(clientList);
 
         public static string ReadString(string msg, int? min = null, int? max = null)
         {
