@@ -14,8 +14,8 @@ namespace Game
             int value;
             Console.WriteLine("\n\t1: Añadir juego.\n\t" +
             "2: Mostrar juegos\n\t" +
-            "0:Cerrar Programa");
-            value = ReadInt("Introduzca una opción", 0, 2);
+            "3: Eliminar juego\n\t0:Cerrar Programa");
+            value = ReadInt("Introduzca una opción", 0, 3);
             return value;
         }
 

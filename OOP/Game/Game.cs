@@ -33,7 +33,6 @@ namespace Game
 
         public string Name { get => name; set => name = value; }
 
-        public string Genre { get => genre.ToString();}
 
         public decimal Price 
         { 
@@ -44,7 +43,7 @@ namespace Game
             } 
         }
 
-        public override string ToString() => $"Nombre: {Name}\t{Genre}\tPrecio: {Price}";
+        public override string ToString() => $"Nombre: {Name}\t{genre}\tPrecio: {Price}";
 
         public static void ShowGenre()
         {

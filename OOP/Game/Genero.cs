@@ -11,27 +11,27 @@ namespace Game
 {
     internal class Genero
     {
-        private static string genre;
+        private string genre;
+        private int minAge;
 
-        public static List<string> genres = new()
+        public Genero(string genre, int minAge)
         {
-            "accion", "ciencia ficcion", "fantasia",
-            "terror", "rpg", "aventuras", "plataformas",
-            "mmorpg"
-        };
+            this.genre = genre;
+            this.minAge = minAge;
+        }
 
-        public void SelectGenre()
+        static public int SelectGenre(List<Genero> genres)
         {
             for (int i = 0; i < genres.Count; i++)
-            {
-                if (i % 4 == 0)
-                    Console.WriteLine();
-                Console.Write($"{i}: {genres.ElementAt(i)}\t\t");
-            }
-            int option = Functions.ReadInt("Elige genero", 0, genres.Count);
-            genre = genres.ElementAt(option);
+                Console.WriteLine($"{i}: {genres.ElementAt(i)}");
+            int option = Functions.ReadInt("Elige genero", 0, genres.Count - 1);
+            return option;
         }
-        public override string ToString() => $"Genero: {genre}";
+
+        public string Genre { get => genre; }
+        public int MinAge { get => minAge; }
+
+        public override string ToString() => $"Genero: {genre} Edad(min): {minAge}";
 
     }
 }
