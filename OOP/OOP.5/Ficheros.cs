@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
@@ -11,12 +12,14 @@ namespace OOP._5
     {
         public const string FILENAME = "clientes.csv";
 
+        public static bool Exist() => File.Exists(FILENAME);
+
         public static bool MakeFile(bool oveRide = true)
         {
             try
             {
                 bool make = false;
-                if (File.Exists(FILENAME))
+                if (Exist())
                     if (oveRide)
                     {
                         Console.Write("\n\n\tEl archivo ya existe. \n\t\t¿Desea sobrescribirlo? S/N");
@@ -42,6 +45,7 @@ namespace OOP._5
         {
             try
             {
+                MakeFile(false);
                 StreamWriter sw = new StreamWriter(FILENAME);
                 clientList.ForEach(client =>
                 {

@@ -12,12 +12,6 @@ namespace Game
         private string name;
         private Genero genre;
         private decimal price;
-        public static List<string> genres = new()
-        {
-            "accion", "ciencia ficcion", "fantasia",
-            "terror", "rpg", "aventuras", "plataformas",
-            "mmorpg"
-        };
         public Game()
         {
             name = "Nuevo Juego";
@@ -33,6 +27,14 @@ namespace Game
 
         public string Name { get => name; set => name = value; }
 
+        public Genero Genre
+        {
+            get
+            {
+                return genre;
+            }
+        }
+
 
         public decimal Price 
         { 
@@ -43,17 +45,7 @@ namespace Game
             } 
         }
 
-        public override string ToString() => $"Nombre: {Name}\t{genre}\tPrecio: {Price}";
-
-        public static void ShowGenre()
-        {
-            for (int i = 0; i < genres.Count; i++)
-            {
-                if (i % 4 == 0)
-                    Console.WriteLine();
-                Console.Write($"{i}: {genres.ElementAt(i)}\t\t");
-            }
-        }
+        public override string ToString() => $"Nombre: {Name}\t{Genre}\tPrecio: {Price}";
 
     }
 }
