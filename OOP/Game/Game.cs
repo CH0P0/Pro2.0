@@ -42,6 +42,8 @@ namespace Game
             set {
                 if (value >= 0)
                     price = value;
+                else
+                    price = 0;
             } 
         }
 
