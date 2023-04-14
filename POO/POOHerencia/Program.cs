@@ -77,7 +77,7 @@ namespace POOHerencia
         {
             this.nombreReptil = nombreReptil; 
         }
-        public override string getNombre() => $"El nombre de la lagartija es {nombreReptil}"
+        public override string getNombre() => $"El nombre de la lagartija es {nombreReptil}";
     }
 
     class Ballena : Mamiferos
