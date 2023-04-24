@@ -11,7 +11,7 @@ namespace OOP._5
         public static void SelectClient(ClientList<Client> clientData)
         {
             Console.WriteLine("\n\tLista de clientes: ");
-            var query = clientData.Select((c, indice) => new { indice, cliente = clientData.ToString() });
+            var query = clientData.Select((c, indice) => new { indice, cliente = clientData[indice].ToString() });
             foreach (var elem in query)
                 Console.WriteLine("\n\t" + elem);
         }

@@ -16,11 +16,14 @@ namespace OOP._5
             int value;
             Client client;
             const string MSGNAME = "Introduce nombre cliente", MSGSURNAME = "Introduce apellidos cliente";
-            Console.Write("\n\n\tDesea usar los clientes de la base de datos? S/N");
-            if (Console.ReadKey().Key == ConsoleKey.S)
+            if (Ficheros.Exist())
             {
-                clientList = Ficheros.TakeData();
-                codClient = clientList[^1].CodClient;
+                Console.Write("\n\n\tDesea usar los clientes de la base de datos? S/N");
+                if (Console.ReadKey().Key == ConsoleKey.S)
+                {
+                    clientList = Ficheros.TakeData();
+                    codClient = clientList[^1].CodClient;
+                }
             }
             Console.Clear();
             if (clientList.Count == 0 )
