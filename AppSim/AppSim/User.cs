@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AppSim
 {
-    internal class User
+    public class User
     {
         /// <summary>
         /// Este atributo representa el nombre del usuario.
@@ -54,8 +54,6 @@ namespace AppSim
                 this.Name = Name.Trim();
         }
 
-        public string GetPassword() => Password;
-
         /// <summary>
         /// Valida si una contraseña reune las características pera ser válida
         /// </summary>
@@ -63,7 +61,7 @@ namespace AppSim
         /// <returns>Valor booleano que nos dice si es válida o no</returns>
         public static bool IsValidPassword(string password)
         {
-            Regex rx = new Regex("^([a-zA-Z0-9]{8,16})$");
+            Regex rx = new Regex("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{8,16}$");
             return rx.IsMatch(password);
         }
 
@@ -135,7 +133,7 @@ namespace AppSim
              SetEmail(newEmail);
         }
 
-        public override string ToString() => $"\n\tCodigo de usuario:{GetCodUser()}\t\tNombre: {GetName}";
+        public override string ToString() => $"\n\tCodigo de usuario:{GetCodUser()}\t\tNombre: {GetName()}";
 
     }
 }
