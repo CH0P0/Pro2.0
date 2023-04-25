@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace AppSim
 {
-    internal class UserList
+    internal class UserList<User> : List<User>
     {
+        public static void ShowUsers(UserList<User> users)
+        {
+            Console.WriteLine("\n\tLista de usuarios: ");
+            users.ForEach(user =>
+            {
+                Console.WriteLine($"\n\t{user}");
+            });
+        }
     }
 }

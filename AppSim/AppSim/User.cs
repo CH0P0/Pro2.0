@@ -9,18 +9,40 @@ namespace AppSim
 {
     internal class User
     {
+        /// <summary>
+        /// Este atributo representa el nombre del usuario.
+        /// </summary>
         private string Name { get; set; }
+
+        /// <summary>
+        /// Este atributo representa la contraseña del usuario.
+        /// </summary>
         private string Password { get; set; }
+
+        /// <summary>
+        /// Este atributo representa el email del usuario.
+        /// </summary>
         private string Email { get; set; }
+        /// <summary>
+        /// Este atributo representa el codigo del usuario,
+        /// para cada uno es único
+        /// </summary>
         private int CodUser { get;}
+
+        /// <summary>
+        /// Este atributo distingue a los administradores.
+        /// </summary>
+        private bool IsAdmin { get; set; }
+        
         static int cod = 1;
 
 
-        public User(string Name, string Password, string Email)
+        public User(string Name, string Password, string Email, bool IsAdmin = false)
         {
             this.Name = Name;
             this.Password = Password;
             this.Email = Email;
+            this.IsAdmin = IsAdmin;
             CodUser = cod++;
         }
 
@@ -34,18 +56,41 @@ namespace AppSim
 
         public string GetPassword() => Password;
 
-        public void SetPassword(string newPassword)
+        /// <summary>
+        /// Valida si una contraseña reune las características pera ser válida
+        /// </summary>
+        /// <param name="password">La contraseña a validar</param>
+        /// <returns>Valor booleano que nos dice si es válida o no</returns>
+        public static bool IsValidPassword(string password)
         {
             Regex rx = new Regex("^([a-zA-Z0-9]{8,16})$");
-            if (rx.IsMatch(newPassword))
+            return rx.IsMatch(password);
+        }
+
+        public void SetPassword(string newPassword)
+        {
+            if (IsValidPassword(newPassword))
                 Password = newPassword;
         }
         
         public string GetEmail() => Email;
-        public void SetEmail(string newEmail)
+
+        /// <summary>
+        /// Valida si un email reune las características pera ser válido
+        /// </summary>
+        /// <param name="password">El email a validar</param>
+        /// <returns>Valor booleano que nos dice si es válido o no</returns>
+        public static bool IsValidEmail(string email)
         {
             Regex rx = new Regex("^[a-zA-Z0-9]{1,}@gmail.com$");
-            if (rx.IsMatch(newEmail))
+            return rx.IsMatch(email);
+        }
+
+        public int GetCodUser () => CodUser;    
+
+        public void SetEmail(string newEmail)
+        {
+            if (IsValidEmail(newEmail))
                 Email = newEmail;
         }
 
@@ -55,6 +100,9 @@ namespace AppSim
             SetName(newName);
         }
 
+        /// <summary>
+        /// Método que permite al usuario cambiar su contraseña
+        /// </summary>
         public void ChangePassword()
         {
             string newPassword, againNewPassword;
@@ -68,21 +116,26 @@ namespace AppSim
                     againNewPassword = Functions.ReadString("Introduzca de nuevo la contraseña: ", 8, 16);
 
                 } while (newPassword != againNewPassword);
-            } while (Regex.IsMatch(newPassword, "^([a-zA-Z0-9]{8,16})$"));
+            } while (!IsValidPassword(newPassword));
             SetPassword(newPassword);
         }
 
+        /// <summary>
+        /// Método que permite al usuario cambiar su email
+        /// </summary>
         public void ChangeEmail()
         {
             string newEmail = Functions.ReadString("Introduzca el nuevo email: ", 1);
 
-            while (Regex.IsMatch(newEmail, "^[a-zA-Z0-9]{1,}@gmail.com$"))
+            while (!IsValidEmail(newEmail))
             {
                 Console.WriteLine("Formato incorrecto, por favor introduzca un email válido");
                 newEmail = Functions.ReadString("Introduzca el nuevo email: ", 1);
             }
              SetEmail(newEmail);
         }
+
+        public override string ToString() => $"\n\tCodigo de usuario:{GetCodUser()}\t\tNombre: {GetName}";
 
     }
 }
