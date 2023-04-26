@@ -45,5 +45,23 @@ namespace AppSim
             Predicate<User> emailFinder = (User user) => user.GetEmail() == email;
             return users.Exists(emailFinder);
         }
+
+        /// <summary>
+        /// Método para encontrar el indice usuario logeado en la lista
+        /// </summary>
+        /// <param name="users">Lista de usuarios</param>
+        /// <param name="username">Nombre a buscar</param>
+        /// <param name="password">Contraseña a buscar</param>
+        /// <returns>retorna el indice del usuario, si no es correcto se devolvera -1</returns>
+        public static int UserLogin(UserList<User> users, string username, string password)
+        {
+            for (int i = 0; i < users.Count; i++)
+            {
+                User user = users[i];
+                if (user.GetName() == username && user.GetPassword() == password)
+                    return i; 
+            }
+            return -1;
+        }
     }
 }

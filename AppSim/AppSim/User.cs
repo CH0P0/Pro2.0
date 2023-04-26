@@ -65,6 +65,8 @@ namespace AppSim
             return rx.IsMatch(password);
         }
 
+        public string GetPassword() => Password;  
+
         public void SetPassword(string newPassword)
         {
             if (IsValidPassword(newPassword))
