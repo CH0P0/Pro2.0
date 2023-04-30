@@ -12,6 +12,12 @@ namespace AppSim
 
         public static bool Exist() => File.Exists(FILENAME);
 
+        /// <summary>
+        /// Método que crea la base de datos si esta no existe
+        /// </summary>
+        /// <returns>
+        /// Valor booleano que muestra si ha sucedido algún error  
+        /// </returns>
         public static bool MakeFile()
         {
             try
@@ -28,6 +34,14 @@ namespace AppSim
             }
         }
 
+        /// <summary>
+        /// Método cuya finalidad es la de guardar en un archivo csv
+        /// los datos recogidos en cada lanzamiento del programa
+        /// </summary>
+        /// <param name="users">Usuarios a guardar en la base de datos</param>
+        /// <returns>
+        /// Valor booleano que muestra si ha sucedido algún error  
+        /// </returns>
         public static bool SaveData(UserList<User> users)
         {
             try
@@ -51,6 +65,11 @@ namespace AppSim
             }
         }
 
+        /// <summary>
+        /// Método que lee los datos del fichero simulando
+        /// una base de datos
+        /// </summary>
+        /// <returns>Los usuarios registrados en la aplicación</returns>
         public static UserList<User> ReadData()
         {
             UserList<User> users = new();

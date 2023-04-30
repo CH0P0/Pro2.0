@@ -36,7 +36,7 @@ namespace AppSim
         /// </summary>
         private bool IsAdmin { get; set; }
         
-        static int cod = 1;
+        public static int cod = 1;
 
 
         public User(string Name, string Password, string Email, bool IsAdmin = false)
@@ -46,6 +46,15 @@ namespace AppSim
             this.Email = Email;
             this.IsAdmin = IsAdmin;
             CodUser = cod++;
+        }
+
+        public User(int CodUser, string Name, string Password, string Email, bool IsAdmin = false)
+        {
+            this.Name = Name;
+            this.Password = Password;
+            this.Email = Email;
+            this.IsAdmin = IsAdmin;
+            this.CodUser = CodUser;
         }
 
         public string GetName() => Name;
