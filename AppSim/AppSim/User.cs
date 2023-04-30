@@ -88,13 +88,15 @@ namespace AppSim
             return rx.IsMatch(email);
         }
 
-        public int GetCodUser () => CodUser;    
 
         public void SetEmail(string newEmail)
         {
             if (IsValidEmail(newEmail))
                 Email = newEmail;
         }
+        public int GetCodUser () => CodUser; 
+        
+        public bool GetIsAdmin() => IsAdmin;
 
         public void ChangeUserName()
         {

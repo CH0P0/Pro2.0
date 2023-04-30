@@ -55,11 +55,22 @@ namespace AppSim
         /// <returns>retorna el indice del usuario, si no es correcto se devolvera -1</returns>
         public static int UserLogin(UserList<User> users, string username, string password)
         {
+            if (!SearchUserName(users, username))
+            {
+                Console.WriteLine("Nombre de usuario incorrecto");
+                return -1;
+            }
             for (int i = 0; i < users.Count; i++)
             {
                 User user = users[i];
                 if (user.GetName() == username && user.GetPassword() == password)
-                    return i; 
+                    if(user.GetPassword() == password)
+                        return i;
+                    else
+                    { 
+                        Console.WriteLine("Contraseña incorrecta");
+                        return -1;
+                    }
             }
             return -1;
         }
