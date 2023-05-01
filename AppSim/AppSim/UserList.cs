@@ -60,13 +60,13 @@ namespace AppSim
                 Console.WriteLine("Nombre de usuario incorrecto");
                 return -1;
             }
-            int index = users.FindIndex(0, users.Count, (User u) => u.GetName() == username && u.GetPassword() == password);ç
+            int index = users.FindIndex(0, users.Count, (User u) => u.GetName() == username && u.GetPassword() == password);
             if (index == -1)
             {
                 Console.WriteLine("Contraseña incorrecta");
                 return index;
             }
-            return index;
+            return index; 
         }
     }
 }
