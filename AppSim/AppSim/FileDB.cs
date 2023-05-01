@@ -22,9 +22,7 @@ namespace AppSim
         {
             try
             {
-                if (!Exist())
-                    File.Create(FILENAME).Close();
-                Console.WriteLine("Archivo creado con exito");
+                File.Create(FILENAME).Close();
                 return true;
             }
             catch (Exception ex)
