@@ -15,11 +15,22 @@ namespace Geometria
         {
             this.Width = Width;
             this.Length = Length;
-            this.Color = Color;
         }
 
         public double GetWidth() => Width;
         public double GetLength() => Length;
+
+        public static Rectangle ReadRectangle()
+        {
+            string color = Functions.ReadString("Introduce el color del rectángulo", 3);
+            double width = Functions.ReadDouble("Introduce el ancho (número positivo)", 0),
+                   length = Functions.ReadDouble("Introduce el largo (número positivo)", 0);
+            return new Rectangle(width, length, color);
+        }
         public override double Area() => GetLength() * GetWidth();
+
+        public string GetArea() => Convert.ToString(Area());
+
+        public override string ToString() => $"Rectángulo:\nColor - {GetColor()}\nAncho - {GetWidth()}\nLargo - {GetWidth()}\nÁrea - {GetArea()}\n\n";
     }
 }
