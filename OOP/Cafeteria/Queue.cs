@@ -12,7 +12,7 @@ namespace Cafeteria
         // Encabezado de la cola
         private Node head;
 
-        // Variables de referencia para trabajar con la pila
+        // Variables de referencia para trabajar con la cola
         private Node work, work2;
 
         // Constructor
