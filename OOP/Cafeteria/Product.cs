@@ -31,6 +31,7 @@ namespace Cafeteria
             products.ForEach(product =>
             {
                 Console.WriteLine($"{i}:\n\t{product}");
+                i++;
             });
         }
 
@@ -38,6 +39,6 @@ namespace Cafeteria
 
         public decimal GetPrice() => Price;
 
-        public override string ToString() => $"Nombre: {GetName()}\tPrecio{GetPrice()}";
+        public override string ToString() => $"Nombre: {GetName()}\n\tPrecio: {GetPrice()}$";
     }
 }
