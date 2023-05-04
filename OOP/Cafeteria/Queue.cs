@@ -27,16 +27,15 @@ namespace Cafeteria
         // Introducir nodos a la cola
         public void Push(Order data)
         {
-            if (Size() < 5)
-            {
-                Node temp = new Node();
-                temp.Data = data;
+            Node temp = new Node();
+            temp.Data = data;
 
-                temp.Next = head.Next;
-                head.Next = temp;
-            }
+            temp.Next = head.Next;
+            head.Next = temp;
+            
         }
 
+        // Eliminar nodos de la cola
         public Order Pop()
         {
             Order dato;

@@ -9,22 +9,13 @@ namespace Cafeteria
 {
     internal class Order
     {
-        static Dictionary<string, decimal> products = new Dictionary<string, decimal>()
-        {
-            { "sandwicht de pollo", 4 },
-            { "tortilla con cebolla", 4 },
-            { "zumo de naranja", 2 }
 
-        };
-
-        string Product { get; set; }
-        decimal Price { get; set; }
+        Product Product { get; set; }
         string Time { get; set; }
 
-        public Order(string Product, decimal Price)
+        public Order(Product Product)
         {
             this.Product = Product;
-            this.Price = Price;
             Time = GetDate();
         }
 
@@ -34,9 +25,8 @@ namespace Cafeteria
             return actualDate.ToString("dd/MM/yyyy HH:mm:ss");
         }
 
-        public static void ShowProducts()
-        {
-        }
+        public string GetTime() => Time;
 
+        public override string ToString() => $"producto: {Product}\tfecha-hora:{GetTime()}";
     }
 }

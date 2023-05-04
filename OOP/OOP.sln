@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OOP4", "OOP4\OOP4.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Game", "Game\Game.csproj", "{2AA2407F-6EBE-4BE1-9BD1-20C3F04B406A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geometria", "Geometria\Geometria.csproj", "{372CCF59-4113-4159-B4C4-8A473E7A7D22}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Geometria", "Geometria\Geometria.csproj", "{372CCF59-4113-4159-B4C4-8A473E7A7D22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cafeteria", "Cafeteria\Cafeteria.csproj", "{AB272C5E-B98D-47DE-B19A-CE3B90B03810}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{372CCF59-4113-4159-B4C4-8A473E7A7D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{372CCF59-4113-4159-B4C4-8A473E7A7D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{372CCF59-4113-4159-B4C4-8A473E7A7D22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB272C5E-B98D-47DE-B19A-CE3B90B03810}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB272C5E-B98D-47DE-B19A-CE3B90B03810}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB272C5E-B98D-47DE-B19A-CE3B90B03810}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB272C5E-B98D-47DE-B19A-CE3B90B03810}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

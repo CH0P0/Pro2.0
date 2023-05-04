@@ -18,8 +18,5 @@ namespace Cafeteria
         public Order Data { get => data; set => data = value; }
 
         internal Node Next { get => next; set => next = value; }
-
-        // Imprimir
-        public override string ToString() => string.Format($"[{data}]");
     }
 }
