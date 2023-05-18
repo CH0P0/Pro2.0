@@ -36,14 +36,14 @@
             }
         }
     }
-    <h1>Método GET</h1>
     <div>
         <p>Introduce ID del usuario, tu nombre y edad. Luego pulsa <strong>Enviar</strong>.</p>
-        <form action="" method="get">
+        <form action="" method="post">
             @{
                 if (Request.Method == "POST")
                 {
-                    <p>POST</p>
+                    <h1>Método POST</h1>
+
                     <p>
                         <label for="id">Introduce tu Id: </label>
                         <input type="number" name="id" value="@Request.Form["id"]"/>
@@ -62,7 +62,7 @@
                 }
                 else
                 {
-                    <p>GET</p>
+                    <h1>Método GET</h1>
                     <p>
                         <label for="id">Introduce tu Id: </label>
                         <input type="number" name="id" />
@@ -84,13 +84,13 @@
         @{
             if (Request.Method == "POST")
             {
-                int id = -1, edad = -1;
-                string nombre;
-                if (int.TryParse(Request.Form["id"], out id))
+                int id2 = -1, edad2 = -1;
+                string nombre2;
+                if (int.TryParse(Request.Form["id"], out id2))
                 {
-                    if (int.TryParse(Request.Form["edad"], out edad))
+                    if (int.TryParse(Request.Form["edad"], out edad2))
                     {
-                        nombre = Request.Form["nombre"];
+                        nombre2 = Request.Form["nombre"];
                     } 
                     else
                     {

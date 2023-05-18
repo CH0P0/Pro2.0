@@ -1,5 +1,9 @@
+using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
+
 namespace WebApplication1
 {
+    [IgnoreAntiforgeryToken(Order = 1001)]
     public class Program
     {
         public static void Main(string[] args)
