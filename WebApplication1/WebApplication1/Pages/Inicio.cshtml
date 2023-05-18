@@ -1,0 +1,144 @@
+﻿@page
+@model WebApplication1.Pages.InicioModel
+@{
+}
+<!--id nombre y edad-->
+<!Doctype html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width"/>
+	<title>Website</title>
+</head>
+
+<body>
+    @{
+        var mensaje = "";
+        var id = 0;
+        var edad = 0;
+        var nombre = "";
+        if (Request.Query.Count > 0)
+        {
+            if (int.TryParse(Request.Query["id"], out id))
+            {
+                if (int.TryParse(Request.Query["edad"], out edad))
+                {
+                    nombre = Request.Query["nombre"];
+                    mensaje = $"Felicidades {nombre}";
+                } 
+                else
+                {
+                    mensaje = "Edad ausente o invalida";                    
+                }
+            }
+            else
+            {
+                mensaje = "Id ausente o invalido";
+            }
+        }
+    }
+
+    @{
+        if (Request.Method == "POST")
+        {
+            
+        }  
+    }
+
+    <h1>Método GET</h1>
+    <div>
+        <p>Introduce ID del usuario, tu nombre y edad. Luego pulsa <strong>Enviar</strong>.</p>
+        <form action="" method="get">
+            @{
+                if (Request.Method == "POST")
+                {
+                    <p>POST</p>
+                    <p>
+                        <label for="id">Introduce tu Id: </label>
+                        <input type="number" name="id" value="@Request.Form["id"]"/>
+                    </p>
+                    <p>
+                        <label for="nombre">Introduce tu nombre: </label>
+                        <input type="text" name="nombre" value="@Request.Form["nombre"]" />
+                    </p>
+                    <p>
+                        <label for="edad">Introduce tu edad: </label>
+                        <input type="number" name="edad" value="@Request.Form["edad"]" />
+                    </p>
+                    <p>
+                        <input type="submit" value="Enviar" />
+                    </p>   
+                }
+                else
+                {
+                    <p>GET</p>
+                    <p>
+                        <label for="id">Introduce tu Id: </label>
+                        <input type="number" name="id" />
+                    </p>
+                    <p>
+                        <label for="nombre">Introduce tu nombre: </label>
+                        <input type="text" name="nombre" />
+                    </p>
+                    <p>
+                        <label for="edad">Introduce tu edad: </label>
+                        <input type="number" name="edad" />
+                    </p>
+                    <p>
+                        <input type="submit" value="Enviar" />
+                    </p>                    
+                }
+            }
+        </form>
+        @{
+            if (Request.Method == "POST")
+            {
+                int id = -1, edad = -1;
+                string nombre
+                if (int.TryParse(Request.Form["id"], out id))
+                {
+                    if (int.TryParse(Request.Form["edad"], out edad))
+                    {
+                        nombre = Request.Form["nombre"];
+                    } 
+                    else
+                    {
+                        <p>edad ausente o invalida</p>
+                    }
+                }
+                else
+                {
+                    <p>id invalido o ausente</p>
+                }
+
+                if (id == -1 || edad == -1)
+                {
+                    <p>datos insuficientes para continuar</p>
+                }
+                else
+                {
+                    <h1>Hoy el usuario con ID: @id cumple @edad años</h1>
+                    for (int i = 0; i < edad; i++)
+                    {
+                        <p><a>Felicidades @nombre</a></p>
+                    }
+                }
+            }
+            else
+            {
+                if(mensaje.Contains("Felicidades"))
+                {
+                        <h1>Hoy el usuario con ID: @id</h1>
+                        for (int i = 0; i < edad; i++)
+                        {
+                        <p><a>@mensaje</a></p>
+                        }
+                }
+                else
+                {
+                    @mensaje;
+                }
+            }                
+        }
+    </div>
+</body>
+</html>
