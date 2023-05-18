@@ -85,7 +85,7 @@
             if (Request.Method == "POST")
             {
                 int id = -1, edad = -1;
-                string nombre
+                string nombre;
                 if (int.TryParse(Request.Form["id"], out id))
                 {
                     if (int.TryParse(Request.Form["edad"], out edad))
