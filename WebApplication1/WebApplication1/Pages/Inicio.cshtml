@@ -12,6 +12,8 @@
 
 <body>
     @{
+        string algo = "Esto es una cadena de texto";
+        int a = algo.Split(' ').Where(p => p == "es").ToList().Count;
         var mensaje = "";
         var id = 0;
         var edad = 0;
@@ -85,7 +87,7 @@
             if (Request.Method == "POST")
             {
                 int id2 = -1, edad2 = -1;
-                string nombre2;
+                string nombre2 = "";
                 if (int.TryParse(Request.Form["id"], out id2))
                 {
                     if (int.TryParse(Request.Form["edad"], out edad2))
@@ -102,16 +104,16 @@
                     <p>id invalido o ausente</p>
                 }
 
-                if (id == -1 || edad == -1)
+                if (id2 == -1 || edad2 == -1)
                 {
                     <p>datos insuficientes para continuar</p>
                 }
                 else
                 {
-                    <h1>Hoy el usuario con ID: @id cumple @edad años</h1>
-                    for (int i = 0; i < edad; i++)
+                    <h1>Hoy el usuario con ID: @id2 cumple @edad2 años</h1>
+                    for (int i = 0; i < edad2; i++)
                     {
-                        <p><a>Felicidades @nombre</a></p>
+                        <p><a>Felicidades @nombre2</a></p>
                     }
                 }
             }
@@ -119,11 +121,11 @@
             {
                 if(mensaje.Contains("Felicidades"))
                 {
-                        <h1>Hoy el usuario con ID: @id</h1>
-                        for (int i = 0; i < edad; i++)
-                        {
+                    <h1>Hoy el usuario con ID: @id</h1>
+                    for (int i = 0; i < edad; i++)
+                    {
                         <p><a>@mensaje</a></p>
-                        }
+                    }
                 }
                 else
                 {
