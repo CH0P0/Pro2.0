@@ -13,7 +13,6 @@
 </head>
 
 <body>
-</body>
 <header>
     <div>
         <img src="./media/0f43f17f-78ba-4307-a0d5-fed381c950fc.jpg" alt="miFoto" width="75" />
@@ -23,7 +22,39 @@
 </header>
 <div class="container">
     <main>
+        <form method="post" action="">
+            @if (Request.Method == "POST")
+            {
+                    <label for="frase">Frase</label>
+                    <input type="text" name="frase" value="@Request.Form["frase"]"  />
+                    <label for="palabra">Palabra</label>
+                    <input type="text" name="palabra" value="@Request.Form["palabra"]" />
+            }
+            else {
+                    <label for="frase">Frase</label>
+                    <input type="text" name="frase"  />
+                    <label for="palabra">Segundo número</label>
+                    <input type="text" name="palabra" />
+            }
+            <p>
+                <input type="submit" value="Send" />
+            </p>
+        </form>
 
+            @if (Request.Method == "POST")
+            {
+                string frase = Request.Form["frase"],
+                       palabra = Request.Form["palabra"];
+                frase.Replace(",", "");
+                frase.Replace(".", "");
+                frase.Replace("!", "");
+                frase = frase.ToLower().Trim();
+                palabra = palabra.ToLower().Trim();
+                    int aparicionPalabra = frase.Split(' ').Where(p => p == palabra).ToList().Count;
+                    int aparicionPalabra2 = frase.Split(' ').Where(p => p == palabra).Count();
+                <p>La palabra aparece @aparicionPalabra -- @aparicionPalabra2</p>
+                    
+            }
     </main>
 
     <aside>
@@ -42,4 +73,5 @@
 <footer>
     <p>19/05/2023 - CIPF César Manrique - Guillermo Afonso Afonso - Curso 2022-2023</p>
 </footer>
+</body>
 </html>
