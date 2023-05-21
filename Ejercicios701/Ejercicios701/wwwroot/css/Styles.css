@@ -5,9 +5,122 @@
 }
 
 body {
+    font-family: sans-serif;
+}
+
+header {
+    height: 150px;
+    background: url("/media/pattern.png"), #fff;
+}
+
+header div {
+    display: flex;
+    align-items: center
+}
+
+img {
+    margin: 20px;
+}
+
+header div p {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+
+.container {
+    display: flex;
+    height: 400px;
+    margin-top: 10px;
+}
+
+main {
+    flex-grow: 4;
+}
+
+aside {
+    flex-grow: 1;
+}
+
+.aside-box {
+    margin: 0 auto;
+    width: 250px;
+    height: 90%;
+    margin-top: 20px;
+        box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3),
+        0px 3px 7px rgba(0, 0, 0, 0.3),
+        0px 1px 0px #fff inset,
+        0px -3px 2px rgba(0, 0, 0, 0.3) inset;
+}
+
+aside h3 {
+    font-size: 24px;
+    text-align: center;
+    margin: 5px;
+    padding-top: 20px;
+    text-decoration: underline;
+}
+
+aside ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+aside ul li {
+    font-size: 20px;
+    margin-top: 35px;
+    letter-spacing: 1px;
+}
+
+aside ul li a {
+    color: #37bcf9;
+    display: block;
+    text-decoration: none;
+    transition: all 200ms;
+}
+
+aside ul li a:hover {
+    transform: scale(1.4, 1.4);
+    text-decoration: underline;
+}
+
+main {
+    width: 80%;
+    height: auto;
+    border: 1px solid #ccc;
+    margin: 20px;
+    background-color: #fff;
+    color: #000;
+    box-shadow: 1px 2px 2px #ddd;
+}
+
+main h2 {
+    text-align: center;
+    margin: 10px;
+    text-decoration: underline;
+}
+
+main .description {
+    margin: 10px;
+    margin-top: 40px;
+}
+
+main .description h3 {
+    margin: 10px;
+}
+
+main .description p {
+    margin: 10px;
 }
 
 footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     background: #000;
     color: #fff;
+    height:75px;
 }
