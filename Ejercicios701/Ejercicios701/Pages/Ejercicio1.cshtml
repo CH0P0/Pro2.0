@@ -23,49 +23,52 @@
     <div class="container">
         <main>
 		    <h1>Operaciones con números</h1>
-		    <form method="post">
-                @if (Request.Method == "POST") {
-			        <label for="num1">Primer número</label>
-			        <input type="text" name="num1" value="@Request.Form["num1"]"  />
-			        <label for="num2">Segundo número</label>
-                    <input type="text" name="num2" value="@Request.Form["num2"]" />
-                    <p>
-				        <input type="submit" value="Operar" />
-                    </p>
-                }
-                else
-                {
-                    <label for="num1">Primer número</label>
-                    <input type="text" name="num1" />
-                    <label for="num2">Segundo número</label>
-                    <input type="text" name="num2" />
-                    <p>
-                        <input type="submit" value="Operar" />
-                    </p>
-                }
-
-            </form>
-
-		    <div class="results">
-                @{
-                    if (Request.Method == "POST")
-                    {
-                        int num1 = int.Parse(Request.Form["num1"]),
-                            num2 = int.Parse(Request.Form["num2"]),
-                            totalSum = num1 + num2,
-                            totalSub = num1 - num2,
-                            totalDiv = num1 / num2,
-                            totalMul = num1 * num2;
-                        <p>Suma</p>
-                        <p>@($"{num1} + {num2} = {totalSum}")</p>
-                        <p>Resta</p>
-                        <p>@($"{num1} - {num2} = {totalSub}")</p>
-                        <p>División</p>
-                        <p>@($"{num1} / {num2} = {totalDiv}")</p>
-                        <p>Multiplicación</p>
-                        <p>@($"{num1} * {num2} = {totalMul}")</p>
+			<div class="exercise1">
+		        <form method="post">
+                    @if (Request.Method == "POST") {
+			            <label for="num1">Primer número</label>
+			            <input type="text" name="num1" value="@Request.Form["num1"]"  />
+			            <label for="num2">Segundo número</label>
+                        <input type="text" name="num2" value="@Request.Form["num2"]" />
+                        <p>
+				            <input type="submit" value="Operar" />
+                        </p>
                     }
-                }
+                    else
+                    {
+                        <label for="num1">Primer número</label>
+                        <input type="text" name="num1" />
+                        <label for="num2">Segundo número</label>
+                        <input type="text" name="num2" />
+                        <p>
+                            <input type="submit" value="Operar" />
+                        </p>
+                    }
+
+                </form>
+
+		        <div class="results">
+                    @{
+                        if (Request.Method == "POST")
+                        {
+                            int num1 = int.Parse(Request.Form["num1"]),
+                                num2 = int.Parse(Request.Form["num2"]),
+                                totalSum = num1 + num2,
+                                totalSub = num1 - num2,
+                                totalDiv = num1 / num2,
+                                totalMul = num1 * num2;
+                        
+                            <p>Suma:</p>
+                            <p>@($"{num1} + {num2} = {totalSum}")</p>
+                            <p>Resta:</p>
+                            <p>@($"{num1} - {num2} = {totalSub}")</p>
+                            <p>División:</p>
+                            <p>@($"{num1} / {num2} = {totalDiv}")</p>
+                            <p>Multiplicación:</p>
+                            <p>@($"{num1} * {num2} = {totalMul}")</p>
+                        }
+                    }
+                </div>
             </div>
         </main>
 

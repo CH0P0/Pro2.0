@@ -22,7 +22,32 @@
     </header>
     <div class="container">
         <main>
+            <h1>Datediff </h1>
+                <form name="formEj3" method="post">
 
+                    @if (Request.Method == "POST")
+                    {
+                        DateTime currentTime = DateTime.Now;
+                        if (DateTime.TryParse(Request.Form["dateintroduced"], out DateTime date) && date.CompareTo(currentTime) < 0)
+                        {
+                            <p>Fecha de hoy: <span>@currentTime.ToShortDateString()</span></p>
+                            <p>Fecha introducida: <span>@date.ToShortDateString()</span></p>
+                            <p>Días entre la fecha introducida y el día de hoy: <span>@date.Subtract(currentTime).Days.ToString().Substring(1) días</span></p>
+                        }
+                        else
+                        {
+                            <p>Introducción de fecha inválida.</p>
+                        }
+                    }
+                    else
+                    {
+                        <p>
+                            <label for="dateIntroduced">Introduce la fecha deseada:</label>
+                            <input type="date" name="dateIntroduced" required />
+                        </p>
+                        <p><input type="submit" class="submitButton" value="Calcular" /></p>
+                    }
+                </form>
         </main>
 
         <aside>
