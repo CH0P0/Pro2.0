@@ -52,10 +52,10 @@
             @if (Request.Method == "POST")
             {
                 string frase = Request.Form["frase"],
-                        palabra = Request.Form["palabra"];
-                frase.Replace(",", " ");
-                frase.Replace(".", " ");
-                frase.Replace("!", " ");
+                       palabra = Request.Form["palabra"];
+                frase = frase.Replace(",", " ");
+                frase = frase.Replace(".", " ");
+                frase = frase.Replace("!", " ");
                 frase = frase.ToLower().Trim();
                 palabra = palabra.ToLower().Trim();
                 int aparicionPalabra = frase.Split(' ').Where(p => p == palabra).ToList().Count;
