@@ -48,11 +48,11 @@
                             <input type="checkbox" name="number4-box"  @(Request.Form["number4-box"] == "on" ? "checked" : "") />
                         </div>
                         <div>
-                            <label>Suma: </label>
+                            <label for="suma">Suma: </label>
                             <input type="radio" name="operacion" value="suma" @(Request.Form["operacion"] == "suma" ? "checked" : "")/>
                         </div>
                         <div>
-                            <label>Multiplicar: </label>
+                            <label for"multiplicacion">Multiplicar: </label>
                             <input type="radio" name="operacion" value="multiplicacion" @(Request.Form["operacion"] == "multiplicacion" ? "checked" : "") />
                         </div>
                     }
@@ -79,17 +79,17 @@
                             <input type="checkbox" name="number4-box"  />
                         </div>
                         <div>
-                            <label>Suma: </label>
+                            <label for="suma">Suma: </label>
                             <input type="radio" name="operacion" value="suma" checked />
                         </div>
                         <div>
-                            <label >Multiplicar: </label>
+                            <label for="multiplicacion" >Multiplicar: </label>
                             <input type="radio" name="operacion" value="multiplicacion" />
                         </div>
                     }
                     <p>
-                        <input type="submit" value="Ejecutar" />
-                        <input type="reset" name="form-1" value="Limpiar" />
+                        <input type="submit" name="form-1" value="Ejecutar" />
+                        <input type="submit" name="form-1" value="Limpiar" />
                     </p>
                 </form>
                 <div id="resultado">
@@ -98,11 +98,11 @@
                         <h2>Resultado</h2>
 
                         int numero1 = 0,
-                            numero2 = 0,
-                            numero3 = 0,
-                            numero4 = 0,
-                            suma = 0,
-                            mult = 1;
+                                    numero2 = 0,
+                                    numero3 = 0,
+                                    numero4 = 0,
+                                    suma = 0,
+                                    mult = 1;
 
                         bool checkNumero1 = Request.Form["number1-box"] == "on";
                         bool checkNumero2 = Request.Form["number2-box"] == "on";
@@ -111,62 +111,40 @@
                         bool sumar = Request.Form["operacion"] == "suma";
                         bool multiplicar = Request.Form["operacion"] == "multiplicacion";
 
+                        List<int> listaNumeros = new();
                         if (checkNumero1 && int.TryParse(Request.Form["number1"], out numero1))
                         {
-                            if (sumar)
-                            {
-                                suma += numero1;
-                            } else if (multiplicar)
-                            {
-                                mult *= numero1;
-                            }
+                            listaNumeros.Add(numero1);
                             <p>Número 1: @numero1</p>
                         }
 
                         if (checkNumero2 && int.TryParse(Request.Form["number2"], out numero2))
                         {
-                            if (sumar)
-                            {
-                                suma += numero2;
-                            } else if (multiplicar)
-                            {
-                                mult *= numero2;
-                            }
+                            listaNumeros.Add(numero2);
                             <p>Número 2: @numero2</p>
                         }
 
                         if (checkNumero3 && int.TryParse(Request.Form["number3"], out numero3))
                         {
-                            if (sumar)
-                            {
-                                suma += numero3;
-                            } else if (multiplicar)
-                            {
-                                mult *= numero3;
-                            }
+                            listaNumeros.Add(numero3);
                             <p>Número 3: @numero3</p>
                         }
 
                         if (checkNumero4 && int.TryParse(Request.Form["number4"], out numero4))
                         {
-                            if (sumar)
-                            {
-                                suma += numero4;
-                            }
-                            else if (multiplicar)
-                            {
-                                mult *= numero4;
-                            }
+                            listaNumeros.Add(numero4);
                             <p>Número 4: @numero4</p>
                         }
 
                         if (sumar)
                         {
+                            listaNumeros.ForEach(n => suma += n);
                             <p>Su suma da: @suma</p>
                         }
 
                         if (multiplicar)
                         {
+                            listaNumeros.ForEach(n => mult *= n);
                             <p>Su multiplicación da: @mult</p>
                         }
                     }
