@@ -271,6 +271,21 @@ main .exercise2 > p {
     margin: 10px;
 }
 
+/*Ejer5*/
+.ejer5 {
+    width: 300px;
+    display:flex;
+    flex-direction:column;
+}
+
+#e5 {
+    margin:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction: column;
+}
+
 /*Contraseña*/
 #passw {
     margin: 10px;
@@ -280,5 +295,15 @@ main .exercise2 > p {
     flex-direction: column;
 }
 
+table {
+    margin: 10px;
+}
+td {
+    border: 1px solid #000;
+}
+
+form > div {
+    margin: 10px;
+} 
 
 
