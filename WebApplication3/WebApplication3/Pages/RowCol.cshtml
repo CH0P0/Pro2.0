@@ -8,13 +8,13 @@
 	@if (Request.Method == "POST")
 	{
 		<label for="filas">Filas</label>
-		<select name="filas">
+		<select name="filas" required>
 			<option value="1">1</option>
 			<option value="3">3</option>
 			<option value="5">5</option>
 		</select>
 		<label for="columnas">Columnas</label>
-		<select name="columnas" size="3">
+		<select name="columnas" size="3" required>
 			<option value="1">1</option>
 			<option value="3">3</option>
 			<option value="5">5</option>
@@ -24,13 +24,13 @@
 	else
 	{
 		<label for="filas">Filas</label>
-		<select name="filas">
+		<select name="filas" required>
 			<option value="1">1</option>
 			<option value="3">3</option>
 			<option value="5">5</option>
 		</select>
 		<label for="columnas">Columnas</label>
-		<select name="columnas" size="3">
+		<select name="columnas" size="3" required>
 			<option value="1">1</option>
 			<option value="3">3</option>
 			<option value="5">5</option>
@@ -43,11 +43,12 @@
 		@if (Request.Method == "POST") {
 			int filas = Convert.ToInt32(Request.Form["filas"]);
 			int columnas = Convert.ToInt32(Request.Form["columnas"]);
+			int celda = 0;
 			@for (int i = 1; i <= filas; i++)
 			{
 				<tr>
 					@for(int j = 0; j < columnas; j++) {
-						<td>@(i + j)</td>
+						<td>@(++celda)</td>
 					}
 				</tr>
 			}

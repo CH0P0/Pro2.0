@@ -124,6 +124,9 @@ footer {
     background: #000;
     color: #fff;
     height:75px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 /*Ejercicio 1*/
@@ -268,6 +271,14 @@ main .exercise2 > p {
     margin: 10px;
 }
 
+/*Contraseña*/
+#passw {
+    margin: 10px;
+}
+#passw form{
+    display: flex;
+    flex-direction: column;
+}
 
 
 
