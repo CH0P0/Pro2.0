@@ -1,0 +1,41 @@
+﻿@page
+@model WebApplication3.Pages.Ejercicio8Model
+@{
+    ViewData["Title"] = "Ejercicio 8 - EJ0705";
+}
+
+<h2>Imagenes número</h2>
+<form name="formEje8" method="post">
+    @if (Request.Method == "POST")
+    {
+
+            <label for="nums">Número a imaginar: (menos el 0) </label>
+            <input type="number" class="numberBox" name="nums" value=@Request.Form["nums"] required />
+            <input type="submit" class="submitButton" value="Convertir">
+            <br/>
+        @if (int.TryParse(Request.Form["nums"], out int numbers))
+        {
+            string imageURL;
+            foreach (char digit in numbers.ToString())
+            {
+                if (digit != 48)
+                {
+                    imageURL = $"/media/numbers/{digit.ToString()}-Number.png";
+                                    <img class="numberImages" src="@imageURL"/>
+                }
+            }
+        }
+        else
+        {
+                    <p>Formulario inválido, se esperan números.</p>
+        }
+
+    }
+    else
+    {
+
+            <label for="nums">Número a imaginar: </label>
+            <input type="number" class="numberBox" name="nums" required />
+            <input type="submit" class="submitButton" value="Convertir">
+    }
+</form>

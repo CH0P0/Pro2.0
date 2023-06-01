@@ -1,0 +1,73 @@
+﻿@page
+@model WebApplication3.Pages.Ejercicio7Model
+@{
+    ViewData["Title"] = "Ejercicio 7 - EJ0705";
+}
+
+<h2>Lista de números solicitados</h2>
+<form name="formEje7" method="post">
+    @if (Request.Method == "POST")
+    {
+        <p>
+            <label for="num">Introduce el número siguiente:</label>
+            <input type="number" class="numberBox" name="num" min="0" required />
+        </p>
+        string allNumbers = "" + @Request.Form["numbers"];
+        if (@Request.Form["num"] != "0")
+        {
+            <input type="hidden" name="numbers" value="@Request.Form["num"] @Request.Form["numbers"]" />
+            <p>Se han introducido: <span>@(allNumbers.Split(' ').Length)</span> números</p>
+
+        }
+        else if (allNumbers == null)
+        {
+            <p>Se han introducido: <span>1</span> números</p>
+        }
+        else
+        {
+            <p>Se han introducido: <span>@(allNumbers.Split(' ').Length - 1)</span> números</p>
+        }
+
+        <p><input type="submit" class="submitButton" value="Introducir" /></p>
+        <p>Introduzca el cero para finalizar.</p>
+
+        @if (int.TryParse(Request.Form["num"], out int number))
+        {
+            if (number == 0)
+            {
+
+                string[] arrNumbers = allNumbers.Substring(0, allNumbers.Length - 1).Split(' ');
+                string[] uniqueNumbers = arrNumbers.Distinct().ToArray();
+                int[] count = new int[uniqueNumbers.Length];
+
+                for (int i = 0; i < arrNumbers.Length; i++)
+                {
+                    for (int j = 0; j < uniqueNumbers.Length; j++)
+                    {
+                        if (arrNumbers[i] == uniqueNumbers[j])
+                        {
+                            count[j]++;
+                            break;
+                        }
+                    }
+                }
+                <p>Número | Veces que aparece</p>
+                for (int i = 0; i < uniqueNumbers.Length; i++)
+                {
+                    <p>@uniqueNumbers[i] -- @count[i] veces</p>
+                }
+            }
+
+        }
+    }
+    else
+    {
+        <p>
+            <label for="num">Introduce el número siguiente:</label>
+            <input type="number" class="numberBox" name="num" min="0" required />
+        </p>
+        <p>Se han introducido: <span>0</span> números</p>
+        <p><input type="submit" class="submitButton" value="Introducir" /></p>
+        <p>Introduzca el cero para finalizar.</p>
+    }
+</form>
