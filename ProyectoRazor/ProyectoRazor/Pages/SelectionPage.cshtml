@@ -93,25 +93,27 @@
                     }
                 }
                 int numRegistros = campo1 == true ? idCliente.Count : campo2 == true ? nombreCliente.Count : emailCliente.Count;
-                <ul>
-                    @for (int i = 0; i < numRegistros; i++)
-                    {
-                        string datos = "";
-                        if (campo1)
+                <div class="scroll">
+                    <ul>
+                        @for (int i = 0; i < numRegistros; i++)
                         {
-                            datos += $"ID:{idCliente.ElementAt(i).ToString()};";
+                            string datos = "";
+                            if (campo1)
+                            {
+                                datos += $"ID:{idCliente.ElementAt(i).ToString()};";
+                            }
+                            if (campo2)
+                            {
+                                datos += $"Nombre:{nombreCliente.ElementAt(i).ToString()};";
+                            }
+                            if (campo3)
+                            {
+                                datos += $"Email:{emailCliente.ElementAt(i).ToString()};";
+                            }
+                            <li>@datos</li>
                         }
-                        if (campo2)
-                        {
-                            datos += $"Nombre:{nombreCliente.ElementAt(i).ToString()};";
-                        }
-                        if (campo3)
-                        {
-                            datos += $"Email:{emailCliente.ElementAt(i).ToString()};";
-                        }
-                        <li>@datos</li>
-                    }
-                </ul>
+                    </ul>
+                </div>
             }
         </div>
     }
