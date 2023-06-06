@@ -1,0 +1,30 @@
+﻿@page
+@model ProyectoRazor.Pages.SelectionPageModel
+@{
+    ViewData["Title"] = "Selection-Page";
+}
+
+<form action="post">
+    @if (Request.Method == "POST") {
+
+    }
+    else {
+        <div class="selects">
+            <div class="check">
+                <input type="checkbox" name="campo1" />
+                <label for="campo1"></label>
+                <input type="checkbox" name="campo2" />
+                <label for="campo2"></label>
+                <input type="checkbox"  name="campo3" />
+                <label for="campo3"></label>
+            </div>
+            <div class="radio">
+                <input type="radio" name="valor"/>
+                <label for="valor"></label>
+                <input type="radio" name="valor"/>
+                <label for="campo1"></label>
+            </div>
+            <input type="submit" value="Mostrar" />
+        </div>
+    }
+</form>
