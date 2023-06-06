@@ -49,7 +49,7 @@ namespace ProyectoRazor.Models
             modelBuilder.Entity<Disco>(entity =>
             {
                 entity.HasKey(e => e.IdDisco)
-                    .HasName("PK__Disco__581B6E770BBFD635");
+                    .HasName("PK__Disco__581B6E7775883003");
 
                 entity.Property(e => e.IdDisco).ValueGeneratedNever();
 
@@ -81,7 +81,7 @@ namespace ProyectoRazor.Models
             modelBuilder.Entity<Interprete>(entity =>
             {
                 entity.HasKey(e => e.IdInterprete)
-                    .HasName("PK__Interpre__5D65494B65A30B8C");
+                    .HasName("PK__Interpre__5D65494BCAEB3381");
 
                 entity.Property(e => e.IdInterprete).ValueGeneratedNever();
 
@@ -115,7 +115,7 @@ namespace ProyectoRazor.Models
             modelBuilder.Entity<Tipo>(entity =>
             {
                 entity.HasKey(e => e.IdTipo)
-                    .HasName("PK__Tipo__9E3A29A5EC628DAB");
+                    .HasName("PK__Tipo__9E3A29A5359D6234");
 
                 entity.Property(e => e.IdTipo).ValueGeneratedNever();
 
