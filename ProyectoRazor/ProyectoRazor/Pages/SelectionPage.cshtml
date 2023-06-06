@@ -3,28 +3,141 @@
 @{
     ViewData["Title"] = "Selection-Page";
 }
-
-<form action="post">
+<h2>Página de selección</h2>
+<p>Seleccione los datos que quiera visualizar</p>
+<form method="post">
     @if (Request.Method == "POST") {
+        <div class="selects">
+            <div class="check">
+                <div>
+                    <label for="campo1">ID: </label>
+                    <input type="checkbox" name="campo1" @(Request.Form["campo1"] == "on" ? "checked" : "") />
+                </div>
+                <div>
+                    <label for="campo2">Nombre: </label>
+                    <input type="checkbox" name="campo2" @(Request.Form["campo2"] == "on" ? "checked" : "") />
+                </div>
+                <div>
+                    <label for="campo3">Email: </label>
+                    <input type="checkbox" name="campo3" @(Request.Form["campo3"] == "on" ? "checked" : "") />
+                </div>
+            </div>
+            <div class="radio">
+                <input type="radio" name="valor" value="unaPuntuacion" @(Request.Form["valor"] == "unaPuntuacion" ? "checked" : "") />
+                <label for="valor">Una Puntuación: </label>
+                <input type="radio" name="valor" value="variasPuntuaciones" @(Request.Form["valor"] == "variasPuntuaciones" ? "checked" : "") />
+                <label for="campo1">Varias Puntuaciones: </label>
+            </div>
+            <input type="submit" value="Mostrar" />
+        </div>
 
+        <div>
+            @if (Request.Form["action"] == "Mostrar")
+            {
+                <h3>Datos devueltos</h3>
+
+                bool campo1 = Request.Form["campo1"] == "on";
+                bool campo2 = Request.Form["campo2"] == "on";
+                bool campo3 = Request.Form["campo3"] == "on";
+                bool unaPuntuacion = Request.Form["valor"] == "unaPuntuacion";
+
+                List<int> idCliente = new();
+                List<string> nombreCliente = new(), emailCliente = new();
+
+                if (unaPuntuacion)
+                {
+                    if (campo1)
+                    {
+                        idCliente = (from cliente in Model.Datos.Cliente
+                                     join puntuacion in Model.Datos.Puntuacion
+                                     on cliente.Id equals puntuacion.Idcliente
+                                     select cliente.Id).ToList();
+                    }
+                    if (campo2)
+                    {
+                        nombreCliente = (from cliente in Model.Datos.Cliente
+                                         join puntuacion in Model.Datos.Puntuacion
+                                         on cliente.Id equals puntuacion.Idcliente
+                                         select cliente.Nombre).ToList();
+                    }
+                    if (campo3)
+                    {
+                        emailCliente = (from cliente in Model.Datos.Cliente
+                                        join puntuacion in Model.Datos.Puntuacion
+                                        on cliente.Id equals puntuacion.Idcliente
+                                        select cliente.Email).ToList();
+                    }
+                }
+                else
+                {
+                    if (campo1)
+                    {
+                        idCliente = (from cliente in Model.Datos.Cliente
+                                     join puntuacion in Model.Datos.Puntuacion
+                                     on cliente.Id equals puntuacion.Idcliente
+                                     select cliente.Id).ToList();
+                    }
+                    if (campo2)
+                    {
+                        nombreCliente = (from cliente in Model.Datos.Cliente
+                                         join puntuacion in Model.Datos.Puntuacion
+                                         on cliente.Id equals puntuacion.Idcliente
+                                         select cliente.Nombre).ToList();
+                    }
+                    if (campo3)
+                    {
+                        emailCliente = (from cliente in Model.Datos.Cliente
+                                        join puntuacion in Model.Datos.Puntuacion
+                                        on cliente.Id equals puntuacion.Idcliente
+                                        select cliente.Email).ToList();
+                    }
+                }
+                int numRegistros = campo1 == true ? idCliente.Count : campo2 == true ? nombreCliente.Count : emailCliente.Count;
+                <ul>
+                    @for (int i = 0; i < numRegistros; i++)
+                    {
+                        string datos = "";
+                        if (campo1)
+                        {
+                            datos += $"ID:{idCliente.ElementAt(i).ToString()};";
+                        }
+                        if (campo2)
+                        {
+                            datos += $"Nombre:{nombreCliente.ElementAt(i).ToString()};";
+                        }
+                        if (campo3)
+                        {
+                            datos += $"Email:{emailCliente.ElementAt(i).ToString()};";
+                        }
+                        <li>@datos</li>
+                    }
+                </ul>
+            }
+        </div>
     }
     else {
         <div class="selects">
             <div class="check">
-                <input type="checkbox" name="campo1" />
-                <label for="campo1"></label>
-                <input type="checkbox" name="campo2" />
-                <label for="campo2"></label>
-                <input type="checkbox"  name="campo3" />
-                <label for="campo3"></label>
+				<div>
+                    <label for="campo1">ID: </label>
+                    <input type="checkbox" name="campo1" />
+                </div>
+                <div>
+                    <label for="campo2">Nombre: </label>
+                    <input type="checkbox" name="campo2" />
+                </div>
+                <div>
+                    <label for="campo3">Email: </label>
+                    <input type="checkbox"  name="campo3" />
+                </div>
             </div>
             <div class="radio">
-                <input type="radio" name="valor"/>
-                <label for="valor"></label>
-                <input type="radio" name="valor"/>
-                <label for="campo1"></label>
+                <input type="radio" name="valor" value="unaPuntuacion"  />
+                <label for="valor">Una Puntuación: </label>
+                <input type="radio" name="valor" value="variasPuntuaciones" />
+                <label for="campo1">Varias Puntuaciones: </label>
             </div>
-            <input type="submit" value="Mostrar" />
+            <input type="submit" name="action" value="Mostrar" />
         </div>
     }
 </form>

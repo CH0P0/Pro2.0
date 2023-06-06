@@ -31,7 +31,6 @@ header div p {
 
 .container {
     display: flex;
-    height: 400px;
     margin-top: 10px;
 }
 
@@ -46,7 +45,7 @@ aside {
 .aside-box {
     margin: 0 auto;
     width: 250px;
-    height: 90%;
+    height: 320px;
     margin-top: 20px;
         box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3),
         0px 3px 7px rgba(0, 0, 0, 0.3),
@@ -117,7 +116,7 @@ main .description p {
     margin: 10px;
 }
 
-footer {
+.container footer {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -129,182 +128,23 @@ footer {
     width: 100%;
 }
 
-/*Ejercicio 1*/
-.exercise1 {
+/* Select Page */
+
+
+.selects {
     display: flex;
-    justify-content: space-around;
+    flex-direction: row;
+    justify-content: center;
 }
 
-main h1 {
-    margin: 10px;
-}
-
-main .exercise1 label {
-    display: block;
-}
-
-main .exercise1 input[type="text"] {
-    height: 30px;
-    border: none;
-    padding-left: 5px;
-    border-radius: 5px;
-    background-color: transparent;
-    color: #ccc;
-    box-shadow: 1px 1px 4px #ccc inset;
-    transition: all 300ms;
-}
-
-main .exercise1 input[type="text"]:focus {
-    color: #444;
-    outline: none;
-}
-
-main .exercise1 label,
-main .exercise1 input[type="text"],
-main .exercise1 input[type="submit"] {
-    margin: 10px;
-}
-
-main .exercise1 input[type="submit"] {
-    height: 30px;
-    cursor: pointer;
-    font-size: 16px;
-    background-color: transparent;
-    border: none;
-    border-left: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    color: #555;
-    padding: 6px;
-    transition: all 200ms;
-}
-
-main .exercise1 input[type="submit"]:hover {
-    background: #37bcf9;
-    color: #fff;
-    border-radius: 5px;
-    transform: scale(1.1, 1.1);
-}
-
-
-main .exercise1 .results {
-    box-shadow: 0px 0px 6px #ddd inset;
-    padding: 10px;
-    width: 200px;
-}
-
-main .exercise1 .results p {
-    margin: 10px;
-}
-
-main .exercise1 .results p:nth-child(2n - 1) {
-    text-decoration: underline;
-    font-weight: bold;
-}
-
-/* Ejercicio 2*/
-
-main .exercise2 form div {
-    margin: 10px;
-}
-
-main .exercise2 form div label {
-    margin-right: 10px;    
-}
-
-main .exercise2 input[type="text"] {
-    height: 30px;
-    border: none;
-    padding-left: 5px;
-    border-radius: 5px;
-    background-color: transparent;
-    color: #ccc;
-    box-shadow: 1px 1px 4px #ccc inset;
-    transition: all 300ms;
-}
-
-main .exercise2 input[type="submit"] {
-    margin: 10px;
-    height: 30px;
-    cursor: pointer;
-    font-size: 16px;
-    background-color: transparent;
-    border: none;
-    border-left: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    color: #555;
-    padding: 6px;
-    transition: all 200ms;
-}
-
-main .exercise2 input[type="text"]:focus {
-    color: #444;
-    outline: none;
-}
-
-main .exercise2 input[type="submit"]:hover {
-    background: #37bcf9;
-    color: #fff;
-    border-radius: 5px;
-    transform: scale(1.1, 1.1);
-}
-
-main .exercise2 > p {
-    margin: 10px;
-}
-
-
-
-/*Ejercicio 4*/
-#ejer4 {
-    display: flex;
-    justify-content: space-around;
-}
-
-#resultado {
-    box-shadow: 0px 0px 6px #ddd inset;
-    padding: 10px;
-    width: 400px;
-    height: 250px;
-}
-
-#resultado p {
-    margin: 10px;
-}
-
-/*Ejer5*/
-.ejer5 {
-    width: 300px;
-    display:flex;
-    flex-direction:column;
-}
-
-#e5 {
-    margin:10px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction: column;
-}
-
-/*Contraseña*/
-#passw {
-    margin: 10px;
-}
-#passw form{
+.selects .check,
+.selects .radio {
     display: flex;
     flex-direction: column;
-}
-
-table {
     margin: 10px;
-
-}
-td {
-    border: 1px solid #000;
 }
 
-form > div {
-    margin: 10px;
-} 
+
+
 
 
