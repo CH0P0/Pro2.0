@@ -11,30 +11,85 @@
     interprete y media de puntuación.
 </p>
 
+       
+@{
+    int contador = 3;
+    DateTime fecha;
+}
 <form method="post">
     @{
-        int contador = TempData["contador"] != null ? (int)TempData["contador"] : 3;
-            <p>@(contador++)</p>
+        int newContador = 3;
     }
-    @if (Request.Method == "POST") { 
-        DateTime fecha = DateTime.Parse(Request.Form["fecha"]);
-        List<string> datos = (from puntuacion in Model.Datos.Puntuacion
-                                join disco in Model.Datos.Disco
-                                on puntuacion.Iddisco equals disco.IdDisco
-                                join interprete in Model.Datos.Interprete
-                                on disco.IdInterprete equals interprete.IdInterprete
-                                select disco.Titulo).ToList(); 
+    @if (Request.Method == "POST") {
+        string fechaStr = Request.Form["fecha"];
+        fecha = DateTime.Parse(fechaStr);
+        var datos = (from p in Model.Datos.Puntuacion
+              join d in Model.Datos.Disco on p.Iddisco equals d.IdDisco
+              join i in Model.Datos.Interprete on d.IdInterprete equals i.IdInterprete
+              where fecha.Year < d.Agno 
+              group p by new { d.Titulo, i.Interprete1 } into g
+              select new
+              {
+                  Titulo = g.Key.Titulo,
+                  Interprete = g.Key.Interprete1,
+                  PuntuacionPromedio = g.Average(p => p.Puntuacion1)
+              }).ToList();
+     
         <div class="inputs">
             <label>Fecha </label>
-            <input type="date" min="1968-01-01" name="fecha" max="1985-12-12" @(Request.Form["fecha"])/>
-            <input type="submit" name="valor" value="Mostrar" @(Request.Form) />
+            <input type="date" min="1968-01-01" name="fecha" max="1985-12-12" value="@Request.Form["fecha"]" />
+            <input type="submit" name="valor" value="Mostrar" style="visibility: hidden" />
         </div>
+
+        @if (Request.Form["valor"] == "Mostrar")
+        {
+            <div class="datos">
+                @for(int i = 0; i < 3; i++)
+                {
+                    <p>@datos.ElementAt(i)</p>
+                }
+            </div>
+        }
+        
+
+        @if (Request.Form["valor"] == "anterior")
+        {
+            contador = Convert.ToInt32(Request.Form["cont"]) - 3;
+            @for (int i = contador - 3; i < contador; i++)
+            {
+                @if (i < datos.Count) {
+                    <p>@datos.ElementAt(i)</p>
+                }
+            }
+        }
+
+        @if (Request.Form["valor"] == "siguiente")
+        {
+            contador = Convert.ToInt32(Request.Form["cont"]) + 3;
+            @for (int i = contador - 3; i < contador; i++)
+            {
+                <p>@datos.ElementAt(i)</p>
+            }
+        }
+        <div>
+            @if (contador > 3)
+            {
+                <input type="submit" name="valor" value="anterior" />
+            }
+            @if (contador < datos.Count)
+            {
+                <input type="submit" name="valor" value="siguiente" />
+            }
+        </div>
+        <input type="hidden" name="cont" value="@contador" @(Request.Form) />
+
     } 
     else 
     {
         <label>Fecha </label>
-        <input type="date" min="1968-01-01" max="1985-12-12" name="fecha" />
+        <input type="date" min="1968-01-01" max="1985-12-12" name="fecha" required />
         <input type="submit" name="valor" value="Mostrar"/>
+        <input type="hidden" name="cont" value="@contador" />
     }
 
 </form>
