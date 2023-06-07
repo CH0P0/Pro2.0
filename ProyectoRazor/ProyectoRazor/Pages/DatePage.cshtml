@@ -38,7 +38,7 @@
         <div class="inputs">
             <label>Fecha </label>
             <input type="date" min="1968-01-01" name="fecha" max="1985-12-12" value="@Request.Form["fecha"]" />
-            <input type="submit" name="valor" value="Mostrar" style="visibility: hidden" />
+            <input type="submit" name="valor" value="Mostrar" />
         </div>
 
         @if (Request.Form["valor"] == "Mostrar")
@@ -46,7 +46,10 @@
             <div class="datos">
                 @for(int i = 0; i < 3; i++)
                 {
-                    <p>@datos.ElementAt(i)</p>
+                    @if (i < datos.Count)
+                    {
+                        <p>@datos.ElementAt(i)</p>
+                    }
                 }
             </div>
         }
