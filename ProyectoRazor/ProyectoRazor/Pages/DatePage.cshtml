@@ -5,4 +5,36 @@
 }
 
 <h2>Página de fecha</h2>
+<p>
+    Selecciona una fecha entre 1965 y 1985 y se mostraran
+    todos los discos de esa fecha en adelante, además de su
+    interprete y media de puntuación.
+</p>
 
+<form method="post">
+    @{
+        int contador = TempData["contador"] != null ? (int)TempData["contador"] : 3;
+            <p>@(contador++)</p>
+    }
+    @if (Request.Method == "POST") { 
+        DateTime fecha = DateTime.Parse(Request.Form["fecha"]);
+        List<string> datos = (from puntuacion in Model.Datos.Puntuacion
+                                join disco in Model.Datos.Disco
+                                on puntuacion.Iddisco equals disco.IdDisco
+                                join interprete in Model.Datos.Interprete
+                                on disco.IdInterprete equals interprete.IdInterprete
+                                select disco.Titulo).ToList(); 
+        <div class="inputs">
+            <label>Fecha </label>
+            <input type="date" min="1968-01-01" name="fecha" max="1985-12-12" @(Request.Form["fecha"])/>
+            <input type="submit" name="valor" value="Mostrar" @(Request.Form) />
+        </div>
+    } 
+    else 
+    {
+        <label>Fecha </label>
+        <input type="date" min="1968-01-01" max="1985-12-12" name="fecha" />
+        <input type="submit" name="valor" value="Mostrar"/>
+    }
+
+</form>
