@@ -71,7 +71,10 @@
             contador = Convert.ToInt32(Request.Form["cont"]) + 3;
             @for (int i = contador - 3; i < contador; i++)
             {
-                <p>@datos.ElementAt(i)</p>
+                @if (i < datos.Count)
+                {
+                    <p>@datos.ElementAt(i)</p>
+                }
             }
         }
         <div>
