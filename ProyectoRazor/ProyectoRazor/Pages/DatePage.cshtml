@@ -26,7 +26,7 @@
         var datos = (from p in Model.Datos.Puntuacion
               join d in Model.Datos.Disco on p.Iddisco equals d.IdDisco
               join i in Model.Datos.Interprete on d.IdInterprete equals i.IdInterprete
-              where fecha.Year < d.Agno 
+              where fecha.Year <= d.Agno 
               group p by new { d.Titulo, i.Interprete1 } into g
               select new
               {

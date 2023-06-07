@@ -1,0 +1,167 @@
+﻿@page
+@model ProyectoRazor.Pages.FilterPageModel
+@{
+	ViewData["Title"] = "Filter-Page";
+}
+
+@{
+		List<string> genero = (from tipo in Model.Datos.Tipo select tipo.Tipo1).ToList();
+}
+
+<h2>Página de filtro</h2>
+<p>
+	Elige el género de disco que quieres buscar, luego
+	si quieres seguir filtrando selecciona el  titulo del disco
+	y saldran todas sus puntuaciones.
+</p>
+
+<form method="post">
+	@if (Request.Method == "POST")
+	{
+		@if (Request.Form["valor"] == "Filtrar1")
+		{
+			string tipoSelected = Request.Form["tipos"];
+			List<string> titulos = (from t in Model.Datos.Tipo
+									join dt in Model.Datos.DiscoTipo on t.IdTipo equals dt.IdTipo
+									join d in Model.Datos.Disco on dt.IdDisco equals d.IdDisco
+									where t.Tipo1 == tipoSelected
+									select d.Titulo).ToList();
+			List<string> filtrado1 = (from t in Model.Datos.Tipo
+													join dt in Model.Datos.DiscoTipo on t.IdTipo equals dt.IdTipo
+													join d in Model.Datos.Disco on dt.IdDisco equals d.IdDisco
+													join i in Model.Datos.Interprete on d.IdInterprete equals i.IdInterprete
+													where t.Tipo1 == tipoSelected
+													select $"{t.Tipo1};{d.Titulo};{i.Interprete1}").ToList();
+			<div>
+				<label for="tipos">Géneros: </label>
+				<select name="tipos">
+					@foreach(string item in genero)
+					{
+						<option value="@item" @(tipoSelected == item ? "selected" : "")>@item</option>
+					}
+				</select>
+				<input type="submit" name="valor" value="Filtrar1" />
+				<label for="titulos">Titulos: </label>
+				<select name="titulos">
+					@foreach(string item in titulos)
+					{
+						<option value="@item">@item</option>
+					}
+				</select>
+				<input type="submit" name="valor" value="Filtrar2"/>
+			</div>
+
+			<div class="scroll">
+				<table>
+					<tr>
+						<td>Género</td>
+						<td>Titulo</td>
+						<td>Interprete</td>
+					</tr>
+					@for (int i = 0; i < filtrado1.Count; i++)
+					{
+						string[] campos = filtrado1.ElementAt(i).Split(';');
+						<tr>
+							<td>@campos[0]</td>
+							<td>@campos[1]</td>
+							<td>@campos[2]</td>
+						</tr>
+					}
+				</table>
+			</div>
+		}
+		if (Request.Form["valor"] == "Filtrar2")
+		{
+			string tipoSelected = Request.Form["tipos"];
+			string tituloSelected = Request.Form["titulos"];
+			List<string> filtrado2 = (from t in Model.Datos.Tipo
+											join dt in Model.Datos.DiscoTipo on t.IdTipo equals dt.IdTipo
+											join d in Model.Datos.Disco on dt.IdDisco equals d.IdDisco
+											join i in Model.Datos.Interprete on d.IdInterprete equals i.IdInterprete
+											join p in Model.Datos.Puntuacion on d.IdDisco equals p.Iddisco
+									where t.Tipo1 == tipoSelected && tituloSelected == d.Titulo
+									select $"{t.Tipo1};{d.Titulo};{i.Interprete1};{p.Puntuacion1}").ToList();
+			List<string> titulos = (from t in Model.Datos.Tipo
+									join dt in Model.Datos.DiscoTipo on t.IdTipo equals dt.IdTipo
+									join d in Model.Datos.Disco on dt.IdDisco equals d.IdDisco
+									where t.Tipo1 == tipoSelected
+									select d.Titulo).ToList();
+			<div>
+				<label for="tipos">Géneros: </label>
+				<select name="tipos">
+					@foreach (string item in genero)
+					{
+						<option value="@item" @(tipoSelected == item ? "selected" : "")>@item</option>
+					}
+				</select>
+				<input type="submit" name="valor" value="Filtrar1" />
+				<label for="titulos">Titulos: </label>
+				<select name="titulos">
+					@foreach (string item in titulos)
+					{
+						<option value="@item" @(tituloSelected == item ? "selected" : "")>@item</option>
+					}
+				</select>
+				<input type="submit" name="valor" value="Filtrar2" />
+			</div>
+
+			<div class="scroll">
+				<table>
+					<tr>
+						<td>Género</td>
+						<td>Titulo</td>
+						<td>Interprete</td>
+						<td>Puntuación</td>
+					</tr>
+					@for (int i = 0; i < filtrado2.Count; i++)
+					{
+						string[] campos = filtrado2.ElementAt(i).Split(';');
+						<tr>
+							<td>@campos[0]</td>
+							<td>@campos[1]</td>
+							<td>@campos[2]</td>
+							<td>@campos[3]</td>
+						</tr>
+					}
+				</table>
+			</div>
+
+		}
+	} 
+	else
+	{
+		List<string> tituloTipoInterprete = (from t in Model.Datos.Tipo join
+												  dt in Model.Datos.DiscoTipo on t.IdTipo equals dt.IdTipo
+												  join d in Model.Datos.Disco on dt.IdDisco equals d.IdDisco
+												  join i in Model.Datos.Interprete on d.IdInterprete equals i.IdInterprete
+											select $"{t.Tipo1};{d.Titulo};{i.Interprete1}").ToList();
+		<div>
+			<label for="tipos">Géneros: </label>
+			<select name="tipos">
+				@foreach(string item in genero)
+				{
+					<option value="@item">@item</option>
+				}
+			</select>
+			<input type="submit" name="valor" value="Filtrar1" />
+		</div>
+		<div class="scroll">
+			<table>
+				<tr>
+					<td>Género</td>
+					<td>Titulo</td>
+					<td>Interprete</td>
+				</tr>
+				@for (int i = 0; i < tituloTipoInterprete.Count; i++)
+				{
+					string[] campos = tituloTipoInterprete.ElementAt(i).Split(';');
+					<tr>
+						<td>@campos[0]</td>
+						<td>@campos[1]</td>
+						<td>@campos[2]</td>
+					</tr>
+				}
+			</table>
+		</div>
+	}
+</form>
