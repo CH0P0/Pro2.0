@@ -28,7 +28,7 @@
                 <input type="radio" name="valor" value="variasPuntuaciones" @(Request.Form["valor"] == "variasPuntuaciones" ? "checked" : "") />
                 <label for="campo1">Varias Puntuaciones: </label>
             </div>
-            <input type="submit" value="Mostrar" />
+            <input type="submit" name="action" value="Mostrar" />
         </div>
 
         <div class="datos">
@@ -51,21 +51,27 @@
                         idCliente = (from cliente in Model.Datos.Cliente
                                      join puntuacion in Model.Datos.Puntuacion
                                      on cliente.Id equals puntuacion.Idcliente
-                                     select cliente.Id).ToList();
+                                     group cliente by cliente.Id into c
+                                     where c.Count() == 1
+                                     select c.Key).ToList();
                     }
                     if (campo2)
                     {
                         nombreCliente = (from cliente in Model.Datos.Cliente
                                          join puntuacion in Model.Datos.Puntuacion
                                          on cliente.Id equals puntuacion.Idcliente
-                                         select cliente.Nombre).ToList();
+                                         group cliente by cliente.Nombre into c
+                                         where c.Count() == 1
+                                         select c.Key.ToString()).ToList();
                     }
                     if (campo3)
                     {
                         emailCliente = (from cliente in Model.Datos.Cliente
                                         join puntuacion in Model.Datos.Puntuacion
                                         on cliente.Id equals puntuacion.Idcliente
-                                        select cliente.Email).ToList();
+                                        group cliente by cliente.Email into c
+                                        where c.Count() == 1
+                                        select c.Key.ToString()).ToList();
                     }
                 }
                 else
@@ -75,21 +81,27 @@
                         idCliente = (from cliente in Model.Datos.Cliente
                                      join puntuacion in Model.Datos.Puntuacion
                                      on cliente.Id equals puntuacion.Idcliente
-                                     select cliente.Id).ToList();
+                                     group cliente by cliente.Id into c
+                                     where c.Count() > 1
+                                     select c.Key).ToList();  
                     }
                     if (campo2)
                     {
                         nombreCliente = (from cliente in Model.Datos.Cliente
                                          join puntuacion in Model.Datos.Puntuacion
                                          on cliente.Id equals puntuacion.Idcliente
-                                         select cliente.Nombre).ToList();
+                                         group cliente by cliente.Nombre into c
+                                         where c.Count() > 1
+                                         select c.Key.ToString()).ToList();
                     }
                     if (campo3)
                     {
                         emailCliente = (from cliente in Model.Datos.Cliente
                                         join puntuacion in Model.Datos.Puntuacion
                                         on cliente.Id equals puntuacion.Idcliente
-                                        select cliente.Email).ToList();
+                                        group cliente by cliente.Email into c
+                                        where c.Count() > 1
+                                        select c.Key.ToString()).ToList();
                     }
                 }
                 int numRegistros = campo1 == true ? idCliente.Count : campo2 == true ? nombreCliente.Count : emailCliente.Count;
