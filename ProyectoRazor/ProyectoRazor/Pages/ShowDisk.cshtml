@@ -8,24 +8,83 @@
 	Página de puntuaciones
 </h2>
 
-<p>
+<p class="resume">
 	Deberás introducir un número del 0 al 10 y presionar que quieres 
 	visualizar, los discos con puntuación media menor a dicho número o los 
-	discos de mayor puntuación media al número
+	discos de mayor puntuación media al número.
 </p>
 
 <form method="post">
 	@if (Request.Method == "POST")
 	{
-		
+		<div class="cajita">
+			<div class="inputs">
+				<label for="punt">Limite: </label>
+				<input type="number" name="punt" id="punt" min="0" max="10" value="@Request.Form["punt"]" required/>
+				<input type="submit" name="action" value="inferior"  />
+				<input type="submit" name="action" value="superior" />
+			</div>
+		</div>
+		int valorLimite = Convert.ToInt32(Request.Form["punt"]);
+		@if (Request.Form["action"] == "inferior")
+		{
+			var discosPuntuacionesInf = (from p in Model.Datos.Puntuacion
+											join d in Model.Datos.Disco on p.Iddisco equals d.IdDisco
+											join i in Model.Datos.Interprete on d.IdInterprete equals i.IdInterprete
+											group p by new { d.Titulo, i.Interprete1 } into g
+											where g.Average(p => p.Puntuacion1) < valorLimite
+											orderby g.Average(p => p.Puntuacion1)
+											select new
+											{
+												Titulo = g.Key.Titulo,
+												Interprete = g.Key.Interprete1,
+												PuntuacionPromedio = g.Average(p => p.Puntuacion1)
+											}).ToList();
+			<div class="caja">
+				<div class="scroll">
+					@for(int i = 0; i < discosPuntuacionesInf.Count; i++)
+					{
+						<p>@($"Titulo: {discosPuntuacionesInf.ElementAt(i).Titulo} ;Interprete: {discosPuntuacionesInf.ElementAt(i).Interprete}; " +
+						$"Puntuación media: {discosPuntuacionesInf.ElementAt(i).PuntuacionPromedio}")</p>
+					}
+				</div>
+			</div>
+		}
+		@if (Request.Form["action"] == "superior")
+		{
+			var discosPuntuacionesSup = (from p in Model.Datos.Puntuacion
+							join d in Model.Datos.Disco on p.Iddisco equals d.IdDisco
+							join i in Model.Datos.Interprete on d.IdInterprete equals i.IdInterprete
+							group p by new { d.Titulo, i.Interprete1 } into g
+							where g.Average(p => p.Puntuacion1) > valorLimite
+							orderby g.Average(p => p.Puntuacion1)
+							select new
+							{
+								Titulo = g.Key.Titulo,
+								Interprete = g.Key.Interprete1,
+								PuntuacionPromedio = g.Average(p => p.Puntuacion1)
+							}).ToList();
+			<div class="caja">
+				<div class="scroll">
+					@for(int i = 0; i < discosPuntuacionesSup.Count; i++)
+					{
+						<p>@($"Titulo: {discosPuntuacionesSup.ElementAt(i).Titulo} ;Interprete: {discosPuntuacionesSup.ElementAt(i).Interprete}; " +
+						$"Puntuación media: {discosPuntuacionesSup.ElementAt(i).PuntuacionPromedio}")</p>
+					}
+				</div>
+			</div>
+
+		}
 	}
 	else
 	{
-		<div class="inputs">
-			<label for="punt">Limite: </label>
-			<input type="number" name="punt" id="punt" min="0" max="10"/>
-			<input type="submit" value="inferior" />
-			<input type="submit" value="superior" />
+		<div class="cajita">
+			<div class="inputs">
+				<label for="punt">Limite: </label>
+				<input type="number" name="punt" id="punt" min="0" max="10" required/>
+				<input type="submit" name="action" value="inferior" />
+				<input type="submit" name="action" value="superior" />
+			</div>
 		</div>
 	}
 </form>
