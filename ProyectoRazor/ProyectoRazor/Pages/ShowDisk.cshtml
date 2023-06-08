@@ -1,0 +1,31 @@
+﻿@page
+@model ProyectoRazor.Pages.ShowDiskModel
+@{
+	ViewData["Title"] = "Filter-Page";
+}
+
+<h2>
+	Página de puntuaciones
+</h2>
+
+<p>
+	Deberás introducir un número del 0 al 10 y presionar que quieres 
+	visualizar, los discos con puntuación media menor a dicho número o los 
+	discos de mayor puntuación media al número
+</p>
+
+<form method="post">
+	@if (Request.Method == "POST")
+	{
+		
+	}
+	else
+	{
+		<div class="inputs">
+			<label for="punt">Limite: </label>
+			<input type="number" name="punt" id="punt" min="0" max="10"/>
+			<input type="submit" value="inferior" />
+			<input type="submit" value="superior" />
+		</div>
+	}
+</form>
