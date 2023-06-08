@@ -17,9 +17,6 @@
     DateTime fecha;
 }
 <form method="post">
-    @{
-        int newContador = 3;
-    }
     @if (Request.Method == "POST") {
         string fechaStr = Request.Form["fecha"];
         fecha = DateTime.Parse(fechaStr);
@@ -36,19 +33,22 @@
               }).ToList();
      
         <div class="inputs">
-            <label>Fecha </label>
+            <label class="fechita">Fecha </label>
             <input type="date" min="1968-01-01" name="fecha" max="1985-12-12" value="@Request.Form["fecha"]" />
             <input type="submit" name="valor" value="Mostrar" />
         </div>
 
         @if (Request.Form["valor"] == "Mostrar")
         {
-            <div class="datos">
+            <div class="datos2">
                 @for(int i = 0; i < 3; i++)
                 {
+                    string datosImprimir = "";
                     @if (i < datos.Count)
                     {
-                        <p>@datos.ElementAt(i)</p>
+                        datosImprimir += $"Titulo: {datos.ElementAt(i).Titulo} ;Interprete: {datos.ElementAt(i).Interprete}; " +
+                        $"Puntuación media: {datos.ElementAt(i).PuntuacionPromedio}";
+                        <p>@datosImprimir</p>
                     }
                 }
             </div>
@@ -58,24 +58,35 @@
         @if (Request.Form["valor"] == "anterior")
         {
             contador = Convert.ToInt32(Request.Form["cont"]) - 3;
+            <div class="datos2">
             @for (int i = contador - 3; i < contador; i++)
             {
-                @if (i < datos.Count) {
-                    <p>@datos.ElementAt(i)</p>
+                string datosImprimir = "";
+                @if (i < datos.Count)
+                {
+                    datosImprimir += $"Titulo: {datos.ElementAt(i).Titulo} ;Interprete: {datos.ElementAt(i).Interprete}; " +
+                    $"Puntuación media: {datos.ElementAt(i).PuntuacionPromedio}";
+                    <p>@datosImprimir</p>
                 }
             }
+            </div>
         }
 
         @if (Request.Form["valor"] == "siguiente")
         {
             contador = Convert.ToInt32(Request.Form["cont"]) + 3;
+            <div class="datos2">
             @for (int i = contador - 3; i < contador; i++)
             {
+                string datosImprimir = "";
                 @if (i < datos.Count)
                 {
-                    <p>@datos.ElementAt(i)</p>
+                    datosImprimir += $"Titulo: {datos.ElementAt(i).Titulo} ;Interprete: {datos.ElementAt(i).Interprete}; " +
+                    $"Puntuación media: {datos.ElementAt(i).PuntuacionPromedio}";
+                    <p>@datosImprimir</p>
                 }
             }
+            </div>
         }
         <div>
             @if (contador > 3)
@@ -92,7 +103,7 @@
     } 
     else 
     {
-        <label>Fecha </label>
+        <label class="fechita">Fecha </label>
         <input type="date" min="1968-01-01" max="1985-12-12" name="fecha" required />
         <input type="submit" name="valor" value="Mostrar"/>
         <input type="hidden" name="cont" value="@contador" />

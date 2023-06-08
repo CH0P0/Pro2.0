@@ -134,7 +134,8 @@ input[type="submit"] {
     margin: 5px;
 }
 
-input[type="submit"] {
+input[type="submit"],
+input[type="date"]{
     height: 30px;
     cursor: pointer;
     font-size: 16px;
@@ -195,6 +196,25 @@ h3 {
 .caja {
     display: flex;
     justify-content: center;
+}
+
+/*Date Page*/
+
+
+.fechita {
+    margin: 10px;
+}
+
+.datos2 {
+    box-shadow: 1px 1px 4px #ccc inset;
+    width: 750px;
+    height: 100px;
+    padding: 4px;
+    margin: 10px;
+}
+
+.datos2 p {
+    margin: 5px;
 }
 
 
