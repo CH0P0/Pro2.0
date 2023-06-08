@@ -105,7 +105,7 @@ main h2 {
 
 main .description {
     margin: 10px;
-    margin-top: 40px;
+    margin-top: 25px;
 }
 
 main .description h3 {
@@ -215,6 +215,16 @@ h3 {
 
 .datos2 p {
     margin: 5px;
+}
+
+/* Filter-Page*/
+
+.s2 {
+    margin:10px;
+}
+
+div > label {
+    margin-left: 10px;
 }
 
 
