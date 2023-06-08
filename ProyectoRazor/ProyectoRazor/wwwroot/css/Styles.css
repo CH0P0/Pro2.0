@@ -238,6 +238,15 @@ div > label {
     justify-content:center
 }
 
+/* GamePage */
+.win {
+    color: red;
+}
+
+.loose {
+    color: green;
+}
+
 
 
 

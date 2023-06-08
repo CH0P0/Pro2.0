@@ -30,11 +30,22 @@
 		</select>
         @if (titulo == eleccion.Split(';')[1].Replace(":",""))
         {
-            <p>Elección correcta. Ha ganado un tortipollo</p>
+
+            <h3 class="win">Elección correcta.</h3>
+            <p>Ha ganado un tortipollo</p>
         }
         else
         {
-            <p>Ha perdido</p>
+            string correctElection = "";
+            foreach(string item in lista)
+            {
+                if (item.Split(';')[1].Replace(":", "") == titulo)
+                {
+                    correctElection = item.Split(';')[0];
+                }
+            }
+            <h3 class="loose">Ha perdido.</h3>
+            <p>La respuesta correcta era: @correctElection</p>
         }
         <input type="hidden" name="opciones" value="@opcionesStorage" @(Request.Form) />
         <input type="hidden" name="titulo" value="@tituloDisco" @(Request.Form) />
@@ -57,7 +68,7 @@
         {
             rnd = rand.Next(0, discosInterpretes.Count);
             opciones.Add($"{discosInterpretes.ElementAt(rnd).Interprete};{discosInterpretes.ElementAt(rnd).Titulo}");
-            opcionesStorage += opciones[i] + ":";
+            opcionesStorage += opciones[i] + (i == 3 ? "" : ":") ;
         }
         tituloDisco = opciones.ElementAt(rand.Next(0, opciones.Count)).Split(';')[1].Replace(":","");
         <p>A que interprete pertenece el siguiente disco: @(tituloDisco)</p>
