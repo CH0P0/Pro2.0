@@ -1,4 +1,74 @@
 ﻿@page
 @model ProyectoRazor.Pages.GamePageModel
 @{
+    ViewData["Title"] = "Game-Page";
 }
+@{
+    string opcionesStorage = "",
+           tituloDisco = "";
+}
+<h2>
+    Página de Juego
+</h2>
+
+<p>Aun no se que poner aqui</p>
+
+<form method="post">
+    @if (Request.Method == "POST")
+    {
+        string datos = Request.Form["opciones"];
+        List<string> lista = datos.Split(':').ToList();
+        string interpreteSelected = Request.Form["juego"];
+        string titulo = Request.Form["titulo"];
+        string eleccion = lista.Find(f => f.Split(';')[0] == interpreteSelected);
+        <p>A que interprete pertenece el siguiente disco: @titulo</p>
+        <select name="juego">
+			@foreach(string item in lista)
+			{
+                <option value="@item.Split(';')[0]" @(interpreteSelected == item.Split(';')[0] ? "selected" : "")>@item.Split(';')[0]</option>
+			}
+		</select>
+        @if (titulo == eleccion.Split(';')[1].Replace(":",""))
+        {
+            <p>Elección correcta. Ha ganado un tortipollo</p>
+        }
+        else
+        {
+            <p>Ha perdido</p>
+        }
+        <input type="hidden" name="opciones" value="@opcionesStorage" @(Request.Form) />
+        <input type="hidden" name="titulo" value="@tituloDisco" @(Request.Form) />
+
+    }
+    else
+    {
+        var discosInterpretes = (from d in Model.Datos.Disco
+              join i in Model.Datos.Interprete on d.IdInterprete equals i.IdInterprete
+              group d by new { d.Titulo, i.Interprete1 } into g
+              select new
+              {
+                  Titulo = g.Key.Titulo,
+                  Interprete = g.Key.Interprete1,
+              }).ToList();
+        Random rand = new();
+        int rnd;
+        List<string> opciones = new();
+        for (int i = 0; i < 4; i++)
+        {
+            rnd = rand.Next(0, discosInterpretes.Count);
+            opciones.Add($"{discosInterpretes.ElementAt(rnd).Interprete};{discosInterpretes.ElementAt(rnd).Titulo}");
+            opcionesStorage += opciones[i] + ":";
+        }
+        tituloDisco = opciones.ElementAt(rand.Next(0, opciones.Count)).Split(';')[1].Replace(":","");
+        <p>A que interprete pertenece el siguiente disco: @(tituloDisco)</p>
+        <select name="juego">
+			@foreach(string item in opciones)
+			{
+				<option value="@item.Split(';')[0]">@item.Split(';')[0]</option>
+			}
+		</select>
+        <input type="submit" name="action" value="Seleccionar"/>
+        <input type="hidden" name="opciones" value="@opcionesStorage"/>
+        <input type="hidden" name="titulo" value="@tituloDisco" />
+    }
+</form>
