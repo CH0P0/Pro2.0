@@ -44,8 +44,9 @@
 				<div class="scroll">
 					@for(int i = 0; i < discosPuntuacionesInf.Count; i++)
 					{
+						double puntu = (double)discosPuntuacionesInf.ElementAt(i).PuntuacionPromedio;
 						<p>@($"Titulo: {discosPuntuacionesInf.ElementAt(i).Titulo} ;Interprete: {discosPuntuacionesInf.ElementAt(i).Interprete}; " +
-						$"Puntuación media: {discosPuntuacionesInf.ElementAt(i).PuntuacionPromedio}")</p>
+						$"Puntuación media: {puntu.ToString("#.##")}")</p>
 					}
 				</div>
 			</div>
@@ -68,8 +69,9 @@
 				<div class="scroll">
 					@for(int i = 0; i < discosPuntuacionesSup.Count; i++)
 					{
+						double puntu = (double)discosPuntuacionesSup.ElementAt(i).PuntuacionPromedio;
 						<p>@($"Titulo: {discosPuntuacionesSup.ElementAt(i).Titulo} ;Interprete: {discosPuntuacionesSup.ElementAt(i).Interprete}; " +
-						$"Puntuación media: {discosPuntuacionesSup.ElementAt(i).PuntuacionPromedio}")</p>
+						$"Puntuación media: {puntu.ToString("#.##")}")</p>
 					}
 				</div>
 			</div>
